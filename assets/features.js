@@ -230,6 +230,12 @@ function vReturns(){
   <div class="tablewrap"><table><thead><tr><th>注文番号</th><th>申請日</th><th>希望</th><th>査定</th><th>金額(税込)</th><th>状態</th></tr></thead><tbody>${discRows}</tbody></table></div>
   ${delivered.length?'':'<p class="legend" style="margin-top:14px">※ 返品は「納品完了」の注文が対象です。</p>'}`;
 }
+function requestReturn(oid){
+  go('ret');
+  newReturn();
+  const sel=document.getElementById('rt_o');
+  if(sel){sel.value=oid;rtFillLines();}
+}
 function newReturn(){
   const delivered=DB.orders.filter(o=>o.status==='納品完了');
   if(!delivered.length){toast('返品対象（納品完了）の注文がありません');return;}
