@@ -131,6 +131,8 @@ document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==
 function cartCount(){return DB.cart.reduce((s,l)=>s+l.qty,0);}
 function updateCartDot(){const n=cartCount();const d=document.getElementById('cartDot');d.style.display=n?'grid':'none';d.textContent=n;}
 function iconFor(cat){return {'ダウンライト':'cat_down','スポットライト':'cat_spot','ベースライト':'cat_base','屋外・防水':'cat_out','ブラケット':'cat_brkt','ペンダント':'cat_pend','間接照明':'cat_indir','制御・調光':'cat_ctrl','ランプ・光源':'cat_lamp','施設照明':'cat_fac'}[cat]||'bulb';}
+function imgFor(cat){return {'ダウンライト':'downlight','スポットライト':'spotlight','ベースライト':'baselight','屋外・防水':'outdoor','ブラケット':'bracket','ペンダント':'pendant','間接照明':'indirect','制御・調光':'control','ランプ・光源':'lamp','施設照明':'facility'}[cat];}
+function prodImg(p){const s=imgFor((p&&p.cat)||p);return s?('assets/img/'+s+'.jpg'):'';}
 
 function catsFor(mode){const k=mode==='customer'?'c':'i';return CATS.filter(c=>c[k]);}
 function catName(c){return (MODE==='internal'&&c.nameI)?c.nameI:c.name;}
@@ -252,7 +254,7 @@ function vOrder(){
   const chips=cats.map(c=>`<span class="chip ${orderFilter.cat===c?'on':''}" onclick="setCat('${c}')">${c}</span>`).join('');
   const list=PRODUCTS.filter(p=>(orderFilter.cat==='すべて'||p.cat===orderFilter.cat)&&(p.name.includes(orderFilter.q)||p.sku.toLowerCase().includes(orderFilter.q.toLowerCase())));
   const cards=list.map(p=>{const sp=specialOf(p.sku);return `<div class="pcard">
-    <div class="thumb"><image-slot id="ph-${p.sku}" shape="rect" placeholder="${p.sku}" style="width:100%;height:100%;display:block"></image-slot>${sp?`<span class="spbadge">特価 -${sp.off}%</span>`:''}</div>
+    <div class="thumb"><image-slot id="ph-${p.sku}" shape="rect" src="${prodImg(p)}" placeholder="${p.sku}" style="width:100%;height:100%;display:block"></image-slot>${sp?`<span class="spbadge">特価 -${sp.off}%</span>`:''}</div>
     <div class="body">
       <div class="sku">${p.sku} ・ ${p.cat}</div>
       <div class="nm">${p.name}</div>

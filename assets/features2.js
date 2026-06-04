@@ -25,7 +25,7 @@ function specialBlock(){
     <div class="ch" style="justify-content:space-between"><span>${icon('tag',{size:16})} ${DB.agency} 様 限定 特価</span><span class="legend" style="text-transform:none;letter-spacing:0">${srcBadge('CRM・販促マスタ')}</span></div>
     <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">
     ${SPECIALS.map(s=>{const p=prod(s.sku);const sp=specialPrice(p);return `<div class="pcard" style="border-color:var(--ink)">
-      <div class="thumb"><image-slot id="ph-sp-${p.sku}" shape="rect" placeholder="${p.sku}" style="width:100%;height:100%;display:block"></image-slot><span class="spbadge">特価 -${s.off}%</span></div>
+      <div class="thumb"><image-slot id="ph-sp-${p.sku}" shape="rect" src="${prodImg(p)}" placeholder="${p.sku}" style="width:100%;height:100%;display:block"></image-slot><span class="spbadge">特価 -${s.off}%</span></div>
       <div class="body">
         <div class="sku">${p.sku} ・ ${p.cat}</div>
         <div class="nm">${p.name}</div>
